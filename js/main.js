@@ -12,7 +12,9 @@ const inpy = document.getElementById('inpy');
 const inpW = document.getElementById('inpW');
 const inpH = document.getElementById('inpH');
 const btnXup = document.getElementById('btn-x-up');
+const btnXdown = document.getElementById('btn-x-down');
 const btnYup = document.getElementById('btn-y-up');
+const btnYdown = document.getElementById('btn-y-down');
 const btnWup = document.getElementById('btn-w-up');
 const btnHup = document.getElementById('btn-h-up');
 
@@ -40,8 +42,17 @@ function loadImg(e){
 function setCanvas(w,h){
         canvas.width = imgHolder.width;
         canvas.height = imgHolder.height;
-}
 
+        loadImageToCanvas();
+}
+let img = new Image();
+function loadImageToCanvas(){
+     
+        img.onload = function(){
+        ctx.drawImage(img, 0,0);
+      }
+    img.src = imgHolder.src;
+}
 
 btnAdd.addEventListener('click', function(){
         state.boxArr.push(new Box());
@@ -67,7 +78,6 @@ range.addEventListener('change', function(e){
 
 let interval = 0;
 btnXup.addEventListener('mousedown', function(e){
-        console.log(e)
         interval = setInterval(function(){
                let box = state.boxArr[0];
                 box.x += 1;
@@ -77,9 +87,42 @@ btnXup.addEventListener('mousedown', function(e){
                 }
                 showBoxData();
                 draw(); 
-        })
-        
+        }, 20)      
 });
+let yInterval = 0;
+btnYup.addEventListener('mousedown', function(e){
+        yInterval = setInterval(function(){
+               let box = state.boxArr[0];
+                box.y += 1;
+                if(box.y + box.h >= canvas.height){
+                        box.y = canvas.height - box.h;
+                        console.log('out')
+                }
+                showBoxData();
+                draw(); 
+        }, 20)      
+});
+
+btnYup.addEventListener('mouseup', function(e){
+                clearInterval(yInterval);
+})
+
+// btnYup.addEventListener('mousedown', function(e){
+//         yInterval = setInterval(function(){
+//                let box = state.boxArr[0];
+//                 box.y += 1;
+//                 if(box.y + box.h >= canvas.height){
+//                         box.y = canvas.height - box.h;
+//                         console.log('out')
+//                 }
+//                 showBoxData();
+//                 draw(); 
+//         }, 20)      
+// });
+
+// btnYup.addEventListener('mouseup', function(e){
+//                 clearInterval(yInterval);
+// })
 
 btnXup.addEventListener('mouseup', function(e){
                 clearInterval(interval);
@@ -88,10 +131,12 @@ btnXup.addEventListener('mouseup', function(e){
 function draw(){
         ctx.fillStyle = "#fff";
         ctx.fillRect(0,0,canvas.width, canvas.height);
+        ctx.drawImage(img, 0,0);
         state.boxArr.forEach(function(el){
                 ctx.fillStyle = el.style;
                 ctx.fillRect(el.x, el.y, el.w, el.h);
         })
+
 }
 
 class Box{
@@ -108,3 +153,4 @@ class Box{
 let state = {
         boxArr: []
 }
+	

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/main.css">
+        <title>Hotspots</title>
+</head>
+<body>
+		<header>
+			<label for="x-axis">X</label>
+			<input id="inpX" type="number" name="x-axis">
+			<button id="btn-x-up">+</button>
+			<button id="btn-x-down">-</button>
+			
+			<label for="y-axis">Y</label>
+			<input id="inpY" type="number" name="y-axis">
+			<button id="btn-y-down">+</button>
+			<button id="btn-y-up">-</button>
+
+			<label for="width">W</label>
+			<input id="inpW" type="number" name="width">
+			<button id="btn-w-up">+</button>
+			<button id="btn-w-down">-</button>
+
+			<label for="height">H</label>
+			<input id="inpH" type="number" name="height">
+			<button id="btn-h-up">+</button>
+			<button id="btn-h-down">-</button>
+
+		</header>
+        
+        <input id="inp-file" type="file">
+        <button type="button" id="btn-add">+</button>
+        <img alt="image" id="img-holder" onchange="loadImg()" />
+        <canvas id="canvas" height="800" width="800"></canvas>
+        <script src="./js/main.js"></script>
+
+</body>
+</html>

@@ -32,6 +32,8 @@ let xUpInterval = 0;
 let xDownInterval = 0;
 let heightIntervalUp = 0;
 let heightIntervalDown = 0;
+let widthIntervalUp = 0;
+let widthIntervalDown = 0;
 
 // When file is selected
 btnUpload.addEventListener('change', function(e){
@@ -182,6 +184,40 @@ btnHdown.addEventListener('mousedown', function(e){
 
 btnHdown.addEventListener('mouseup', function(e){
                 clearInterval(heightIntervalDown);
+});
+
+// Increase Block Width
+btnWup.addEventListener('mousedown', function(e){
+        widthIntervalDown = setInterval(function(){
+               let box = state.boxArr[0];
+                box.w += 1;
+                if(box.w >= canvas.width){
+                        box.w = canvas.width;
+                }
+                showBoxData();
+                draw(); 
+        }, 20)      
+});
+
+btnWup.addEventListener('mouseup', function(e){
+                clearInterval(widthIntervalDown);
+});
+
+// Decrease Block Width
+btnWdown.addEventListener('mousedown', function(e){
+        widthIntervalUp = setInterval(function(){
+               let box = state.boxArr[0];
+                box.w -= 1;
+                if(box.w <= 5){
+                        box.w = 5;
+                }
+                showBoxData();
+                draw(); 
+        }, 20)      
+});
+
+btnWdown.addEventListener('mouseup', function(e){
+                clearInterval(widthIntervalUp);
 });
 
 

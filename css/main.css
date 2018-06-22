@@ -1,5 +1,7 @@
 canvas {
 	border: 3px solid pink;
+	display: block;
+	margin: 50px auto;
 }
 
 #img-holder {

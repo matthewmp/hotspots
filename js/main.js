@@ -22,8 +22,14 @@ const btnWdown = document.getElementById('btn-w-down');
 const btnHup = document.getElementById('btn-h-up');
 const btnHdown = document.getElementById('btn-h-down');
 
+const formResizeCanvas = document.getElementById('form-resizeCanvas');
+const inpResizeWidth = document.getElementById('inp-resizeCanvasWidth');
+const inpResizeHeight = document.getElementById('inp-resizeCanvasHeight');
+
 var imgHolder = document.getElementById('img-holder');
 let img = new Image();
+let imgOffsetWidth = 0;
+let imgOffsetHeight = 0;
 
 // Intervals to set and clear
 let yDownInterval = 0;
@@ -66,6 +72,22 @@ function loadImageToCanvas(){
       }
     img.src = imgHolder.src;
 }
+
+// Resize Image from input fields
+function resizeCanvas(w, h){
+    console.log('resizing: ', w, h)
+    canvas.width = w;
+    canvas.height = h;
+    draw(w, h);
+}
+
+// Event Listener for resizing canvas
+formResizeCanvas.addEventListener('submit', function(e){
+    e.preventDefault();
+    imgOffsetWidth = inpResizeWidth.value;
+    imgOffsetHeight = inpResizeHeight.value;
+    resizeCanvas(imgOffsetWidth, imgOffsetHeight);
+});
 
 // Add new block to canvas
 btnAdd.addEventListener('click', function(){
@@ -225,7 +247,13 @@ btnWdown.addEventListener('mouseup', function(e){
 function draw(){
         ctx.fillStyle = "#fff";
         ctx.fillRect(0,0,canvas.width, canvas.height);
-        ctx.drawImage(img, 0,0);
+        if(imgOffsetWidth && imgOffsetHeight){
+            ctx.drawImage(img, 0, 0, imgOffsetWidth, imgOffsetHeight);    
+        } else {
+            console.log('else')
+            ctx.drawImage(img, 0,0);    
+        }
+        
         state.boxArr.forEach(function(el){
                 ctx.fillStyle = el.style;
                 ctx.fillRect(el.x, el.y, el.w, el.h);

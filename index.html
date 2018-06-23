@@ -14,8 +14,8 @@
 			
 			<label for="y-axis">Y</label>
 			<input id="inpY" type="number" name="y-axis">
-			<button id="btn-y-up">+</button>
-			<button id="btn-y-down">-</button>
+			<button id="btn-y-down">+</button>
+			<button id="btn-y-up">-</button>
 
 			<label for="width">W</label>
 			<input id="inpW" type="number" name="width">
@@ -27,13 +27,23 @@
 			<button id="btn-h-up">+</button>
 			<button id="btn-h-down">-</button>
 
+			<input id="inp-file" type="file">
+        	<button type="button" id="btn-add">+</button>
+
+        	<form id="form-resizeCanvas">
+        		<input id="inp-resizeCanvasWidth" type="number"  name="resizeCanvasWidth" placeholder="Width">
+
+        		<input id="inp-resizeCanvasHeight" type="number" name="resizeCanvasHeight" placeholder="Height">
+        		<button type="submit">Resize</button>
+        	</form>
 		</header>
-        <canvas id="canvas" height="800" width="800"></canvas>
-        <input id="inp-file" type="file">
-        <button type="button" id="btn-add">+</button>
-        <input id="range" type="range" min="10" max="1000" step="1" >
-        <img alt="image" id="img-holder" onchange="loadImg()" />
-        <script src="./js/main.js"></script>
+        
+
+        <main>
+	        <img alt="image" id="img-holder" onchange="loadImg()" />
+	        <canvas id="canvas" height="400" width="400"></canvas>
+	        <script src="./js/main.js"></script>
+	    </main>
 
 </body>
 </html>

@@ -1,15 +1,106 @@
-canvas {
-        border: 3px solid pink;
+/* General Settings */
+
+html, body, div, p, input, label{
+	margin: 0;
+	padding: 0;
 }
 
-#img-holder {
-        display: ;
+body{
+	position: relative;
+	font-family: arial, serif;
+}
 
+button {
+    border-style: none;
+    background: #ccc;
+    color: #222;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:focus, input:focus {
+	outline: 0;
+}
+
+main {
+	text-align: center;
+}
+
+form{
+	width: 250px;
+	border-bottom: 1px solid lightblue;
+	padding-bottom: 5px;
+	margin: 10px 0;
+}
+
+form input{
+	width: 36px;
+    text-align: center;
+    font-size: 10px;
+}
+
+
+label{
+	font-size: 10px;
+}
+
+canvas {
+        border: 1px solid pink;
+}
+
+.canvas-buffer{
+	height: 100px;
+	width: 100%;
+}
+
+
+/* Header Settings */
+header{
+	position: absolute;
+	width: 250px;
 	border: 3px solid pink;
-	display: block;
+	text-align: center;
+	background: rgba(10,10,10,0.8);
+	color: #eee;
+}
+
+#toolbar-header{
+	height: 20px;
+	width: 100%;
+	background: #aaa;
+	cursor: move;
+}
+
+/*  Form Resize */
+#form-resizeCanvas input{
+	width: 60px;
+}
+
+
+#btn-add{
+	margin: 25px;
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+    background: #fff;
+    color: red;
+}
+
+#inp-file{
+	margin: 20px 10px;
+}
+
+#inp-file:focuse{
+	outline: 0;
+	cursor: pointer;
+	margin: 20px 10px;
+}
+
+
+#img-holder {
+    display: none;
+	border: 3px solid pink;
 	margin: 50px auto;
 }
 
-#img-holder {
-	display: none;
-}
+

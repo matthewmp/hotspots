@@ -6,38 +6,44 @@
         <title>Hotspots</title>
 </head>
 <body>
-		<header>
-			<label for="x-axis">X</label>
-			<input id="inpX" type="number" name="x-axis">
-			<button id="btn-x-up">+</button>
-			<button id="btn-x-down">-</button>
+		<header id="header">
+			<div id="toolbar-header"></div>
+			<form id="form-XY">
+				<label for="x-axis">X</label>
+				<input id="inpX" type="number" name="x-axis">
+				<button id="btn-x-up">+</button>
+				<button id="btn-x-down">-</button>
 			
-			<label for="y-axis">Y</label>
-			<input id="inpY" type="number" name="y-axis">
-			<button id="btn-y-down">+</button>
-			<button id="btn-y-up">-</button>
+				<label for="y-axis">Y</label>
+				<input id="inpY" type="number" name="y-axis">
+				<button id="btn-y-down">+</button>
+				<button id="btn-y-up">-</button>
+			</form>
+			<form id="form-HW">
+				<label for="width">W</label>
+				<input id="inpW" type="number" name="width">
+				<button id="btn-w-up">+</button>
+				<button id="btn-w-down">-</button>
 
-			<label for="width">W</label>
-			<input id="inpW" type="number" name="width">
-			<button id="btn-w-up">+</button>
-			<button id="btn-w-down">-</button>
-
-			<label for="height">H</label>
-			<input id="inpH" type="number" name="height">
-			<button id="btn-h-up">+</button>
-			<button id="btn-h-down">-</button>
-
-			<input id="inp-file" type="file">
-        	<button type="button" id="btn-add">+</button>
+				<label for="height">H</label>
+				<input id="inpH" type="number" name="height">
+				<button id="btn-h-up">+</button>
+				<button id="btn-h-down">-</button>
+			</form>
 
         	<form id="form-resizeCanvas">
+        		<label for="resizeCanvasWidth">Resize</label>
         		<input id="inp-resizeCanvasWidth" type="number"  name="resizeCanvasWidth" placeholder="Width">
 
         		<input id="inp-resizeCanvasHeight" type="number" name="resizeCanvasHeight" placeholder="Height">
         		<button type="submit">Resize</button>
         	</form>
+
+			<button type="button" id="btn-add">+</button>
+        	<input id="inp-file" type="file">
 		</header>
         
+        <div class="canvas-buffer"></div>
 
         <main>
 	        <img alt="image" id="img-holder" onchange="loadImg()" />

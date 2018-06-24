@@ -76,7 +76,6 @@ header{
 	width: 60px;
 }
 
-
 #btn-add{
 	margin: 25px;
     width: 50px;
@@ -84,6 +83,11 @@ header{
     font-size: 25px;
     background: #fff;
     color: red;
+}
+
+#btn-add:active{
+	background: #222;
+	color: #fff;
 }
 
 #inp-file{

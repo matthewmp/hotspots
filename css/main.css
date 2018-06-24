@@ -82,12 +82,12 @@ header{
     height: 50px;
     font-size: 25px;
     background: #fff;
-    color: red;
+    color: #222;
 }
 
 #btn-add:active{
-	background: #222;
-	color: #fff;
+	background: #eee;
+	color: #ff0000;
 }
 
 #inp-file{

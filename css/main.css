@@ -53,6 +53,10 @@ canvas {
 	width: 100%;
 }
 
+.hidden {
+	display: none;
+}
+
 
 /* Header Settings */
 header{
@@ -107,4 +111,45 @@ header{
 	margin: 50px auto;
 }
 
+
+/*  Table Styles */
+#key-table{
+	position: absolute;
+	right: 0;
+}
+
+table{
+	width: 250px;
+	border: 2px solid #222;
+	color: #fff;
+	background: #333;
+}
+
+th, tr, td{
+	border: 1px solid #ccc;
+}
+
+table
+
+th{
+	text-align: left;
+}
+#key-holder-grab-bar td{
+	height: 20px;
+	border: 0;	
+}
+
+.table-grab{
+	background: #ccc;
+	border: 0;
+	cursor: move;
+}
+
+#table-min{
+	cursor: pointer;
+}
+
+.key{
+	
+}
 

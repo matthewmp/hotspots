@@ -51,6 +51,12 @@ let heightIntervalDown = 0;
 let widthIntervalUp = 0;
 let widthIntervalDown = 0;
 
+// Table Variables
+let table = document.getElementById('key-table');
+let tableGrab = document.getElementById('table-grab');
+let tableMin =  document.getElementById('table-min');
+let tbody = document.getElementById('tbody');
+
 // When file is selected
 btnUpload.addEventListener('change', function(e){
         loadImg(e);
@@ -103,15 +109,15 @@ btnAdd.addEventListener('click', function(){
 });
 
 // Update all fields to represent 1 block's properties at a time
-function showBoxData(){
-        state.boxArr.forEach(function(box){
-                if(box.selected){
-                        inpX.value = box.x;
-                        inpY.value = box.y;
-                        inpW.value = box.w;
-                        inpH.value = box.h;
-                }
-        })
+function showBoxData(el){
+        // state.boxArr.forEach(function(box){
+                // if(box.selected){
+                        inpX.value = el.x;//box.x;
+                        inpY.value = el.y;//box.y;
+                        inpW.value = el.w;//box.w;
+                        inpH.value = el.h;//box.h;
+               // }
+        //})
         
 }
 
@@ -259,17 +265,6 @@ function moveToolBar(e){
 }
 
 window.addEventListener('mousemove', moveToolBar);
-
-
-
-
-
-
-
-
-
-
-
 // Click Events
 let mousePosObj = {
         xStart: 0,
@@ -332,6 +327,8 @@ function drag(e){
                         mousePosObj.yStart = e.clientY;
                         mousePosObj.active = true;
                         mousePosObj.element = el;
+
+                        showBoxData(el);
                         canvas.addEventListener('mousemove', moveBox);
                 }
         });
@@ -470,6 +467,8 @@ function moveBox(e){
                         moveResizeBoxes(el, mousePosObj.xDiff, mousePosObj.yDiff);
                         adjustResizeBoxes(el);
                         keepInBounds(el);
+
+                        showBoxData(el);
                 }
        });
 };
@@ -523,6 +522,58 @@ function keepInBounds(el){
                 el.y = 0;
         }
 }
+
+/*===========  TABLE =========== */
+
+tableGrab.addEventListener('mousedown', grabTable);
+window.addEventListener('mouseup', function(){
+    console.log('up');
+    window.removeEventListener('mousemove', moveTable);
+})
+
+// When Table is Clicked to Move
+function grabTable(){
+    window.addEventListener('mousemove', moveTable);       
+}
+
+function moveTable(e){
+    let x = e.clientX;
+    let y = e.clientY;
+    console.log(e.clientX, e.clientY)
+    table.style.left = e.clientX - 125 + 'px';
+    table.style.top = e.clientY - 20 + 'px';
+}
+
+
+// Key Concept Table Components
+function buildKeyComponents(item, key, text){
+    var tr = document.createElement('tr');
+    for(let i = 0; i < arguments.length; i++){
+        var td = document.createElement('td');
+        td.innerText = arguments[i];
+        tr.appendChild(td);
+        tr.classList = 'key';
+        tr.addEventListener('click', function(e){
+            e.stopPropagation();
+            console.log('click')
+        }, true)
+
+        tbody.appendChild(tr);
+    }
+    
+    // return tr;
+}
+
+// Minimize Table
+tableMin.addEventListener('click', function(e){
+    if(!tbody.classList.value){
+        tbody.classList.value = 'hidden';
+        this.innerText = '>';
+    } else {
+        tbody.classList.value = '';
+        this.innerText = '<';
+    }
+});
 
 
 function draw(){

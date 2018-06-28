@@ -31,16 +31,35 @@
 				<button type="button" id="btn-h-down">-</button>
 			</form>
 
-        	<form id="form-resizeCanvas">
-        		<label for="resizeCanvasWidth">Resize</label>
-        		<input id="inp-resizeCanvasWidth" type="number"  name="resizeCanvasWidth" placeholder="Width">
+                        <form id="form-item">
+                                <label for="item">Item #</label>
+                                <input class="inpKeys" type="number" id="inpItem" name="item">
+                                <button type="button" id="btn-item">Set</button>
+                        </form>
 
-        		<input id="inp-resizeCanvasHeight" type="number" name="resizeCanvasHeight" placeholder="Height">
-        		<button type="submit">Resize</button>
-        	</form>
+                        <form id="form-key">
+                                <label for="key">Key</label>
+                                <input class="inpKeys" type="number" id="inpKey" name="key">
+                                <button type="button" id="btn-key">Set</button>
+                        </form>
 
-			<button type="button" id="btn-add">+</button>
-        	<input id="inp-file" type="file">
+                        <form id="form-text">
+                                <label for="text">Text</label>
+                                <input class="inpKeys" type="text" id="inpText" name="text">
+                                <button type="button" id="btn-text">Set</button>
+                        </form>
+
+
+                	<form id="form-resizeCanvas">
+                		<label for="resizeCanvasWidth">Resize</label>
+                		<input id="inp-resizeCanvasWidth" type="number"  name="resizeCanvasWidth" placeholder="Width">
+
+                		<input id="inp-resizeCanvasHeight" type="number" name="resizeCanvasHeight" placeholder="Height">
+                		<button type="submit">Resize</button>
+                	</form>
+
+        			<button type="button" id="btn-add">+</button>
+                	<input id="inp-file" type="file">
 		</header>
 
 		<aside id="key-holder-wrapper">

@@ -13,6 +13,11 @@ const inpY = document.getElementById('inpY');   // Position y field
 const inpW = document.getElementById('inpW');   // Width field
 const inpH = document.getElementById('inpH');   // Height Field
 
+// Inputs for toolbar that affect key settings
+const inpKey = document.getElementById('inpKey');
+const inpText = document.getElementById('inpText');
+const inpItem = document.getElementById('inpItem');
+
 // Grab Toolbar
 const header = document.getElementById('header');
 const toolbar = document.getElementById('toolbar-header');
@@ -116,6 +121,9 @@ function showBoxData(el){
                         inpY.value = el.y;//box.y;
                         inpW.value = el.w;//box.w;
                         inpH.value = el.h;//box.h;
+                        inpText.value = el.text;
+                        inpKey.value = el.key;
+                        inpItem.value = el.item;
                // }
         //})
         
@@ -601,6 +609,9 @@ class Box{
                 this.w = 100;
                 this.h = 25;
                 this.selected = false;
+                this.text = '';
+                this.key = '';
+                this.item = '';
                 this.style = "rgba(255,0,255, 0.5)",
                 this.resizeActive = false,
                 this.resizeStyle = "rgba(0,200,255,0.8)",

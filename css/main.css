@@ -75,6 +75,11 @@ header{
 	cursor: move;
 }
 
+#btnKeys{
+	height: 100%;
+	background: #fff;
+}
+
 /*  Form Resize */
 #form-resizeCanvas input{
 	width: 60px;
@@ -113,9 +118,9 @@ header{
 
 
 /*  Table Styles */
-#key-table{
+#keyHolderWrapper{
 	position: absolute;
-	right: 0;
+	right: 100px;
 }
 
 table{
@@ -136,6 +141,7 @@ th{
 }
 #key-holder-grab-bar td{
 	height: 20px;
+	width: 50%;
 	border: 0;	
 }
 
@@ -151,4 +157,56 @@ th{
 
 #inpText{
 	width: 80%;
+}
+
+/* Key Text Area */
+
+#keyHolderWrapper{
+	background: #333;
+	width: 250px;
+}
+
+#keysTextBox{
+	display: none;
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%);
+	border: 3px solid black;
+	background: #445;
+	text-align: center;
+}
+
+#keysTextArea{
+	display: block;
+}
+
+#btnLoadKeys{
+	line-height: 30px;
+    border-style: none;
+    margin: 5px;
+    background: #fff;
+    color: red;
+}
+
+#btnKeys{
+	margin: 10px;
+	padding: 5px;
+}
+
+#keysTextClose{
+	font-size: 20px;
+    width: 30px;
+    padding: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+#tdText{
+	overflow: hidden;
+}
+
+.tableRow:hover{
+	cursor: pointer;
+	background: #ff00ff;
 }

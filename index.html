@@ -62,27 +62,20 @@
                 	<input id="inp-file" type="file">
 		</header>
 
-		<aside id="key-holder-wrapper">
+		<aside id="keyHolderWrapper">
+                        <button id="btnKeys">Add Keys</button>
         	<table id="key-table">
         		<thead>
         			<tr id="key-holder-grab-bar">
         				<td id="table-min"><</td>
-        				<td id="table-pre-grab"></td>
         				<td id="table-grab" class="table-grab"></td>
         			</tr>
         			<tr>
-        				<th>Item</th>
         				<th>Key</th>
         				<th>Text</th>
         			</tr>
         		</thead>
-        		<tbody id="tbody">
-        			<tr>
-        				<td>1</td>
-        				<td>567</td>
-        				<td>This is a line inside of the concept</td>
-        			</tr>
-        		</tbody>
+        		<tbody id="tbody"></tbody>
         	</table>
         </aside>
 
@@ -93,7 +86,13 @@
 	        <img alt="image" id="img-holder" onchange="loadImg()" />
 	        <canvas id="canvas" height="400" width="400"></canvas>
 	        <script src="./js/main.js"></script>
-	    </main>
+	</main>
+
+        <aside id="keysTextBox">
+                <div id="keysTextClose">X</div>
+                <textarea name="keysTextArea" id="keysTextArea" cols="100" rows="30"></textarea>
+                <button id="btnLoadKeys">Load Keys</button>
+        </aside>
 
 </body>
 </html>

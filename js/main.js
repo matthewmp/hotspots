@@ -1,9 +1,10 @@
-var txt;
+let state = {};
+let xPadding = 0;
+let yPadding = 70;
 window.onload = function(){
     // Setup Canvas
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-
 
     // Grab box variables
     const btnUpload = document.getElementById('inp-file');  // Open File Button
@@ -65,9 +66,10 @@ window.onload = function(){
     let widthIntervalDown = 0;
 
     // Table Variables
-    let table = document.getElementById('key-table');
+    let keyTable = document.getElementById('keyTable');
     let tableGrab = document.getElementById('table-grab');
     let tableMin =  document.getElementById('table-min');
+    let toolbarMin = document.getElementById('toolbarMin');
     let tbody = document.getElementById('tbody');
     let tableRow = document.getElementById('tableRow');
     let keyHolderWrapper = document.getElementById('keyHolderWrapper');
@@ -277,7 +279,7 @@ window.onload = function(){
             if(toolbarObj.selected){                
                     let diff = toolbarObj.getDiff(e.clientX, e.clientY);
                     
-                    header.style.top = e.clientY - (toolbar.offsetHeight / 2) + 'px';
+                    header.style.top = e.clientY - (toolbar.offsetHeight / 2) - 10 + 'px';
                     header.style.left = e.clientX - (toolbar.offsetWidth / 2) + 'px';
             }
     }
@@ -578,8 +580,6 @@ window.onload = function(){
 
             tbody.appendChild(tr);
         }
-        
-        // return tr;
     }
 
     // Minimize Table
@@ -593,15 +593,28 @@ window.onload = function(){
         }
     });
 
+    // Minimize Toolbar
+        toolbarMin.addEventListener('click', function(e){
+        if(!toolbarFormWrapper.classList.value){
+            toolbarFormWrapper.classList.value = 'hidden';
+            this.innerText = '>';
+        } else {
+            toolbarFormWrapper.classList.value = '';
+            this.innerText = '<';
+        }
+    });
+
+    // Close Key Input Box
     keysTextClose.addEventListener('click', function(){
         keysTextBox.style.display = 'none';
     });
 
+    // Show Key Input Box
     btnKeys.addEventListener('click', function(){
        keysTextBox.style.display = 'block'; 
     });
 
-    
+    // Parse keys into state
     btnLoadKeys.addEventListener('click', function(){
         let txt = keysTextArea.value;
         txt.split('\n').forEach(function(el, ind){
@@ -613,16 +626,20 @@ window.onload = function(){
             });
         });
         loadKeysToTable();
+        keysTextBox.style.display = 'none';
     });
 
+    // Load all keys to keyTable
     function loadKeysToTable(){
+        // Clear Tabel
+        tbody.innerHTML = '';
         state.keysArr.forEach(function(el){
             let tr = document.createElement('tr');
             tr.classList = 'tableRow'
             let key = document.createElement('td');
-            key.id = 'tdKey';
+            key.classList = 'tdKey';
             let txt = document.createElement('td');
-            txt.id = 'tdText';
+            txt.classList = 'tdText';
 
             key.innerText = el.key;
             txt.innerText = el.text;
@@ -632,6 +649,23 @@ window.onload = function(){
             tbody.appendChild(tr);
         });
     }
+
+    // Handle event when key row is clicked
+    keyTable.addEventListener('dblclick', function(e){
+        if(e.target.parentElement.classList[0] === 'tableRow'){
+            let key = e.target.parentElement.childNodes[0].innerText;
+            let text = e.target.parentElement.childNodes[1].innerText;
+
+            state.boxArr.forEach(function(el){
+                if(el.selected){
+                    el.key = key;
+                    el.text = text;
+
+                    showBoxData(el);
+                }
+            });
+        }
+    });
 
 
     function draw(){
@@ -648,20 +682,24 @@ window.onload = function(){
                     ctx.fillRect(el.x, el.y, el.w, el.h);
                     adjustResizeBoxes(el);
                     resizeBoxDraw(el);
+                    ctx.strokeStyle = '#333';
+                    ctx.font="10px arial";
+                    ctx.strokeText(el.key, el.x + 2, el.y + 10);
+                    ctx.strokeText(el.item, (el.x + el.w) - 20, el.y + 10);
             });
             window.requestAnimationFrame(draw);
     }
 
     class Box{
             constructor(){
-                    this.x = 0;
-                    this.y = 0;
-                    this.w = 100;
-                    this.h = 25;
-                    this.selected = false;
-                    this.text = '';
-                    this.key = '';
-                    this.item = '';
+                    this.x = 0,
+                    this.y = 0,
+                    this.w = 100,
+                    this.h = 25,
+                    this.selected = false,
+                    this.text = '',
+                    this.key = '',
+                    this.item = '',
                     this.style = "rgba(255,0,255, 0.5)",
                     this.resizeActive = false,
                     this.resizeStyle = "rgba(0,200,255,0.8)",
@@ -715,7 +753,7 @@ window.onload = function(){
             }
     }
 
-    let state = {
+    state = {
             boxArr: [],
             keysArr: []
     }

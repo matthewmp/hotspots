@@ -9,22 +9,18 @@ window.onload = function(){
     // Grab box variables
     const btnUpload = document.getElementById('inp-file');  // Open File Button
     const btnAdd = document.getElementById('btn-add');  // Add new Block Button
+    const btnMinus = document.getElementById('btn-minus');  // Remove Block Button
 
     const inpX = document.getElementById('inpX');   // Position x field
     const inpY = document.getElementById('inpY');   // Position y field
     const inpW = document.getElementById('inpW');   // Width field
     const inpH = document.getElementById('inpH');   // Height Field
 
-    // Inputs for toolbar that affect key settings
-    const inpKey = document.getElementById('inpKey');
-    const inpText = document.getElementById('inpText');
-    const inpItem = document.getElementById('inpItem');
-
     // Grab Toolbar
     const header = document.getElementById('header');
     const toolbar = document.getElementById('toolbar-header');
 
-    // All buttons that effect block position and size
+    // All buttons that effect box position and size
     const btnXup = document.getElementById('btn-x-up'); 
     const btnXdown = document.getElementById('btn-x-down');
     const btnYup = document.getElementById('btn-y-up');
@@ -33,6 +29,16 @@ window.onload = function(){
     const btnWdown = document.getElementById('btn-w-down');
     const btnHup = document.getElementById('btn-h-up');
     const btnHdown = document.getElementById('btn-h-down');
+
+    // All buttons that affect box key info
+    const btnItem = document.getElementById('btnItem');
+    const btnKey = document.getElementById('btnKey');
+    const btnText = document.getElementById('btnText');
+
+    // Inputs that affect box key info
+    const inpItem = document.getElementById('inpItem');
+    const inpKey = document.getElementById('inpKey');
+    const inpText = document.getElementById('inpText');    
 
     // Resize elements
     const formResizeCanvas = document.getElementById('form-resizeCanvas');
@@ -125,19 +131,34 @@ window.onload = function(){
             state.boxArr.push(new Box());
     });
 
+    // Remove block from canvas
+    btnMinus.addEventListener('click', function(){
+            let delIndexArr = [];
+            state.boxArr.forEach(function(el, ind){
+                if(el.selected){
+                    delIndexArr.push(ind);
+                }
+            });
+
+            delIndexArr.forEach(function(el){
+                state.boxArr.splice(el, 1)
+            })
+    });
+
     // Update all fields to represent 1 block's properties at a time
-    function showBoxData(el){
-            // state.boxArr.forEach(function(box){
-                    // if(box.selected){
-                            inpX.value = el.x;//box.x;
-                            inpY.value = el.y;//box.y;
-                            inpW.value = el.w;//box.w;
-                            inpH.value = el.h;//box.h;
-                            inpText.value = el.text;
-                            inpKey.value = el.key;
-                            inpItem.value = el.item;
-                   // }
-            //})
+    function showBoxData(){
+            state.boxArr.forEach(function(box){
+
+                    if(box.selected){
+                            inpX.value = box.x;//box.x;
+                            inpY.value = box.y;//box.y;
+                            inpW.value = box.w;//box.w;
+                            inpH.value = box.h;//box.h;
+                            inpText.value = box.text;
+                            inpKey.value = box.key;
+                            inpItem.value = box.item;
+                   }
+            })
             
     }
 
@@ -248,6 +269,33 @@ window.onload = function(){
             });    
     });
 
+    // Set Item #
+    btnItem.addEventListener('click', function(e){
+        state.boxArr.forEach(function(el){
+            if(el.selected){
+                el.item = inpItem.value;
+            }
+        })
+    });
+
+    // Set Key #
+    btnKey.addEventListener('click', function(e){
+        state.boxArr.forEach(function(el){
+            if(el.selected){
+                el.key = inpKey.value;
+            }
+        })
+    });
+
+    // Set Box Text
+    btnText.addEventListener('click', function(e){
+        state.boxArr.forEach(function(el){
+            if(el.selected){
+                el.text = inpText.value;
+            }
+        })
+    });
+
     // Toolbar Movements
     let toolbarObj = {
             xStart: 0,
@@ -348,7 +396,6 @@ window.onload = function(){
                             mousePosObj.active = true;
                             mousePosObj.element = el;
 
-                            showBoxData(el);
                             canvas.addEventListener('mousemove', moveBox);
                     }
             });
@@ -419,7 +466,7 @@ window.onload = function(){
                                 el.h = 5;
                         }
                     adjustResizeBoxes(el);
-                    showBoxData(el);
+                    showBoxData();
                     } 
             });
     }
@@ -444,7 +491,7 @@ window.onload = function(){
                                 el.w = 5;
                         }
                     adjustResizeBoxes(el) 
-                    showBoxData(el); 
+                    showBoxData(); 
                     } 
             });
     }
@@ -465,6 +512,7 @@ window.onload = function(){
             canvas.removeEventListener('mousemove', resizeBoxHeight);
             resetResizeActive();
             canvas.addEventListener('mousedown', resizeTop);
+            showBoxData();
     });
 
     function moveBox(e){
@@ -490,7 +538,7 @@ window.onload = function(){
                             adjustResizeBoxes(el);
                             keepInBounds(el);
 
-                            showBoxData(el);
+                            showBoxData();
                     }
            });
     };
@@ -523,10 +571,10 @@ window.onload = function(){
 
     // Reposition Resize Boxes While Adjusting
     function adjustResizeBoxes(el){
-            el.resize.top.y = el.y - 4;
+            el.resize.top.y = el.y;
             el.resize.top.x = el.x + (el.w / 2);
             el.resize.right.y = el.y + (el.h / 2) - 4;
-            el.resize.right.x = el.x + el.w - 4;
+            el.resize.right.x = el.x + el.w - 8;
     }
 
     // Keep box in boundaries of canvas
@@ -575,7 +623,6 @@ window.onload = function(){
             tr.classList = 'key';
             tr.addEventListener('click', function(e){
                 e.stopPropagation();
-                console.log('click')
             }, true)
 
             tbody.appendChild(tr);
@@ -667,7 +714,7 @@ window.onload = function(){
         }
     });
 
-
+//  Draw, State, Box Class
     function draw(){
             ctx.fillStyle = "#fff";
             ctx.fillRect(0,0,canvas.width, canvas.height);
@@ -702,7 +749,7 @@ window.onload = function(){
                     this.item = '',
                     this.style = "rgba(255,0,255, 0.5)",
                     this.resizeActive = false,
-                    this.resizeStyle = "rgba(0,200,255,0.8)",
+                    this.resizeStyle = "rgba(255,255,0,0.8)",
                     this.resize = {
                             top: {
                                     w: 8,
@@ -749,7 +796,7 @@ window.onload = function(){
 
             deactivateResize(){
                     this.resizeActive = false;
-                    this.resizeStyle = "rgba(0,200,255,0.8)"
+                    this.resizeStyle = "rgba(255,255,0,0.8)"
             }
     }
 

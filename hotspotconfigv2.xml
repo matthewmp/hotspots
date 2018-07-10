@@ -1,0 +1,201 @@
+﻿<xml version="1.0">
+<hotspots>
+
+<!-- X = Left/Right -->
+<!-- Y = Up/Down -->
+<!-- All points are relative to the initial Xpos & ypos -->
+<!--" sname = system choice key -->
+
+<!-- Item 1 - Patagonia Brewing Co. -->
+<spot sid="1" sname="529" width="0" height="0" xpos="10" ypos="91">
+<corner xax="273" yax="0">2</corner>
+<corner xax="273" yax="35">2</corner>
+<corner xax="0"  yax="35">4</corner>
+</spot>
+
+<!-- Item 2 - At Patagonia Brewing Co, we believe life is best lived as an adventure.   -->
+<spot sid="2" sname="530" width="0" height="0" xpos="0" ypos="130">
+<corner xax="531" yax="0">2</corner>
+<corner xax="531" yax="22">2</corner>
+<corner xax="0"  yax="22">4</corner>
+</spot>
+
+<!-- Item 3 - Our   -->
+<spot sid="3" sname="531" width="0" height="0" xpos="553" ypos="123">
+<corner xax="29" yax="0">2</corner>
+<corner xax="29" yax="22">2</corner>
+<corner xax="0"  yax="22">4</corner>
+</spot>
+
+<!-- Item 3a  - brewery is located in the Patagonia region of Argentina   -->
+<spot sid="4" sname="531" width="0" height="0" xpos="18" ypos="144">
+<corner xax="412" yax="0">2</corner>
+<corner xax="412" yax="22">2</corner>
+<corner xax="0"  yax="22">4</corner>
+</spot>
+
+<!-- Item 4  -and our next adventure is    -->
+<spot sid="5" sname="532" width="0" height="0" xpos="434" ypos="144">
+<corner xax="195" yax="0">2</corner>
+<corner xax="195" yax="22">2</corner>
+<corner xax="0"  yax="22">4</corner>
+</spot>
+
+<!-- Item 5  -is to import three of our best tasting specialty beers, with hops grown in Patagonia,    -->
+<spot sid="6" sname="532" width="0" height="0" xpos="18" ypos="166">
+<corner xax="600" yax="0">2</corner>
+<corner xax="600" yax="22">2</corner>
+<corner xax="0"  yax="22">4</corner>
+</spot>
+
+<!-- Item 5a  -to the US,    -->
+<spot sid="7" sname="532" width="0" height="0" xpos="18" ypos="188">
+<corner xax="80" yax="0">2</corner>
+<corner xax="80" yax="22">2</corner>
+<corner xax="0"  yax="22">4</corner>
+</spot>
+
+<!-- Item 6  -Bohemian Golden Pilsner – this slightly sweet Pilsner has a bright     -->
+<spot sid="8" sname="533" width="0" height="0" xpos="47" ypos="215">
+<corner xax="515" yax="0">2</corner>
+<corner xax="515" yax="25">2</corner>
+<corner xax="0"  yax="25">4</corner>
+</spot>
+
+<!-- Item 6a  -citrusy aroma, golden color, and a refreshing, crisp finish  (4.9% Alcohol)   -->
+<spot sid="9" sname="533" width="0" height="0" xpos="47" ypos="240">
+<corner xax="557" yax="0">2</corner>
+<corner xax="557" yax="22">2</corner>
+<corner xax="0"  yax="22">4</corner>
+</spot>
+
+<!-- Item 7  -Amber Lager– this full-bodied Lager has notes of caramel and a roasted    -->
+<spot sid="10" sname="534" width="0" height="0" xpos="47" ypos="263">
+<corner xax="552" yax="0">2</corner>
+<corner xax="552" yax="21">2</corner>
+<corner xax="0"  yax="21">4</corner>
+</spot>
+
+<!-- Item 7a  -nutty aroma, perfectly balanced by a sweet and smooth -->
+<spot sid="11" sname="534" width="0" height="0" xpos="47" ypos="284">
+<corner xax="426" yax="0">2</corner>
+<corner xax="426" yax="17">2</corner>
+<corner xax="0"  yax="17">4</corner>
+</spot>
+
+<!-- Item 7b  -finish (5.4% Alcohol)-->
+<spot sid="12" sname="534" width="0" height="0" xpos="47" ypos="301">
+<corner xax="165" yax="0">2</corner>
+<corner xax="165" yax="22">2</corner>
+<corner xax="0"  yax="22">4</corner>
+</spot>
+
+
+<!-- Item 8 Session Pale Ale – called “Küné” in Patagonia, this deep golden Ale has -->
+<spot sid="13" sname="535" width="0" height="0" xpos="47" ypos="324">
+<corner xax="558" yax="0">2</corner>
+<corner xax="558" yax="25">2</corner>
+<corner xax="0"  yax="25">4</corner>
+</spot>
+
+<!-- Item 8b  a refreshing taste, slightly hoppy aroma, and a sharp yet delicate  -->
+<spot sid="14" sname="535" width="0" height="0" xpos="47" ypos="345">
+<corner xax="500" yax="0">2</corner>
+<corner xax="500" yax="20">2</corner>
+<corner xax="0"  yax="20">4</corner>
+</spot>
+
+<!-- Item 8c  4.8% aclohol -->
+<spot sid="15" sname="535" width="0" height="0" xpos="47" ypos="365">
+<corner xax="160" yax="0">2</corner>
+<corner xax="160" yax="20">2</corner>
+<corner xax="0"  yax="20">4</corner>
+</spot>
+
+<!-- Item 9 We will proudly donate 1% of profits to protect America’s National Parks for  -->
+<spot sid="16" sname="536" width="0" height="0" xpos="18" ypos="405">
+<corner xax="570" yax="0">2</corner>
+<corner xax="570" yax="20">2</corner>
+<corner xax="0"  yax="20">4</corner>
+</spot>
+
+<!-- Item 9b We will proudly donate 1% of profits to protect America’s National Parks for  -->
+<spot sid="17" sname="536" width="0" height="0" xpos="18" ypos="425">
+<corner xax="160" yax="0">2</corner>
+<corner xax="160" yax="20">2</corner>
+<corner xax="0"  yax="20">4</corner>
+</spot>
+
+<!-- Item 10Open your next adventure with Patagonia Brewing Co.  -->
+<spot sid="18" sname="537" width="0" height="0" xpos="18" ypos="465">
+<corner xax="425" yax="0">2</corner>
+<corner xax="425" yax="20">2</corner>
+<corner xax="0"  yax="20">4</corner>
+</spot>
+
+<!-- Item 11 Availabe in  -->
+<spot sid="19" sname="538" width="0" height="0" xpos="18" ypos="515">
+<corner xax="100" yax="0">2</corner>
+<corner xax="100" yax="20">2</corner>
+<corner xax="0"  yax="20">4</corner>
+</spot>
+
+<!-- Item 12  6 pack 12oz. bottles of each style  ($9.99) -->
+<spot sid="20" sname="538" width="0" height="0" xpos="18" ypos="537">
+<corner xax="350" yax="0">2</corner>
+<corner xax="350" yax="20">2</corner>
+<corner xax="0"  yax="20">4</corner>
+</spot>
+
+
+<!-- Item 13 12 pack 12oz. bottle variety pack with 4 of each style ($15.99) -->
+<spot sid="21" sname="539" width="0" height="0" xpos="18" ypos="558">
+<corner xax="500" yax="0">2</corner>
+<corner xax="500" yax="20">2</corner>
+<corner xax="0"  yax="20">4</corner>
+</spot>
+
+<!-- Item Last - Bottl 1 -->
+<spot sid="22" sname="540" width="0" height="0" xpos="608" ypos="230">
+<corner xax="108" yax="0">2</corner>
+<corner xax="108" yax="235">2</corner>
+<corner xax="0"  yax="235">4</corner>
+</spot>
+
+<!-- Item Last - Bottl 2 -->
+<spot sid="23" sname="541" width="0" height="0" xpos="718" ypos="230">
+<corner xax="100" yax="0">2</corner>
+<corner xax="100" yax="235">2</corner>
+<corner xax="0"  yax="235">4</corner>
+</spot>
+
+<!-- Item Last - Bottl 3 -->
+<spot sid="24" sname="542" width="0" height="0" xpos="820" ypos="230">
+<corner xax="110" yax="0">2</corner>
+<corner xax="110" yax="235">2</corner>
+<corner xax="0"  yax="235">4</corner>
+</spot>
+
+
+
+
+</hotspots>
+
+
+  <img width="950" height="535" xpadding="10px" ypadding="0px" url="images/Cell_1.jpg"></img>
+  <choices all="" none="None are unique"></choices>
+  <selectall sid="820"></selectall>
+  <nothing sid="543"></nothing>
+
+  <select max="55" min="1" color="0x33FF00" maxMessage="You have selected the maximum number of one choice, you can change your choice by unselecting the previous area and making a new selection."></select>
+</xml>
+
+
+
+
+
+
+
+
+
+

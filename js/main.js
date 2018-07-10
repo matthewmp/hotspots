@@ -1,6 +1,5 @@
 let state = {};
-let xPadding = 0;
-let yPadding = 70;
+let ouptXML;
 window.onload = function(){
     // Setup Canvas
     const canvas = document.getElementById('canvas');
@@ -79,6 +78,16 @@ window.onload = function(){
     let tbody = document.getElementById('tbody');
     let tableRow = document.getElementById('tableRow');
     let keyHolderWrapper = document.getElementById('keyHolderWrapper');
+
+    // Set default padding for flash app
+    let xPadding = 0;
+    let yPadding = 70;
+
+    // Padding inputs and buttons
+    var inpPaddingY = document.getElementById('inpPaddingY');
+    var inpPaddingX = document.getElementById('inpPaddingX');
+    var btnPaddingY = document.getElementById('btnPaddingY');
+    var btnPaddingX = document.getElementById('btnPaddingX');
 
     // When file is selected
     btnUpload.addEventListener('change', function(e){
@@ -159,7 +168,8 @@ window.onload = function(){
                             inpItem.value = box.item;
                    }
             })
-            
+            inpPaddingX.value = xPadding;
+            inpPaddingY.value = yPadding;
     }
 
     // Set listeners to move block forward on x axis
@@ -296,6 +306,17 @@ window.onload = function(){
         })
     });
 
+    // Set padding
+    btnPaddingX.addEventListener('click', function(e){
+        xPadding = inpPaddingX.value;
+        showBoxData();
+    });
+
+    btnPaddingY.addEventListener('click', function(e){
+        yPadding = inpPaddingY.value;
+        showBoxData();
+    });
+
     // Toolbar Movements
     let toolbarObj = {
             xStart: 0,
@@ -304,7 +325,6 @@ window.onload = function(){
             getDiff: function(x,y){
                     return {x: x - this.xStart, y: y - this.yStart}
             }
-
     }
 
     toolbar.addEventListener('mousedown', function(e){
@@ -800,6 +820,61 @@ window.onload = function(){
             }
     }
 
+
+//  XML Output Code
+const xmlHeader = 
+`
+<xml version="1.0">
+<hotspots>
+
+<!-- X = Left/Right -->
+<!-- Y = Up/Down -->
+<!-- All points are relative to the initial Xpos & ypos -->
+<!--" sname = system choice key -->
+`
+// Hotspot Items
+
+
+
+    oupoutXML = function(){
+    console.log(xmlHeader);
+    state.boxArr.forEach((el, ind) => {
+        let hsItem = 
+        `
+        <!-- Item ${el.item} - ${el.text} -->
+        <spot sid=${el.item} sname=${el.key} width="0" height="0" xpos=${el.x + xPadding} ypos=${el.y + yPadding}>
+        <corner xax=${el.w} yax="0">2</corner>
+        <corner xax=${el.w} yax=${el.h}>2</corner>
+        <corner xax="0"  yax=${el.h}>4</corner>
+        </spot>
+        `
+
+        console.log(hsItem);
+    });
+
+    let tail = 
+    `
+        </hotspots>
+          <img width=${canvas.width} height=${canvas.height} xpadding=${xPadding} ypadding=${yPadding} url="images/Cell_1.jpg"></img>
+          <choices all="" none="None are unique"></choices>
+          <selectall sid="820"></selectall>
+          <nothing sid="543"></nothing>
+
+          <select max="55" min="1" color="0x33FF00" maxMessage="You have selected the maximum number of one choice, you can change your choice by unselecting the previous area and making a new selection."></select>
+        </xml>
+    `
+
+    console.log(tail);
+}
+
+
+
+
+
+
+
+
+
     state = {
             boxArr: [],
             keysArr: []
@@ -807,3 +882,5 @@ window.onload = function(){
             
     draw();
 }
+
+

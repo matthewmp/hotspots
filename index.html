@@ -73,9 +73,16 @@
                         		<input id="inp-resizeCanvasHeight" type="number" name="resizeCanvasHeight" placeholder="Height">
                         		<button type="submit">Resize</button>
                         	</form>
-                                        <button type="button" id="btn-minus">-</button>
-                			<button type="button" id="btn-add">+</button>
-                        	<input id="inp-file" type="file">
+                                
+                                <button id="btnUpdateKeys">Update Keys</button>
+                                <br>
+
+                                <button type="button" id="btn-minus">-</button>
+        			<button type="button" id="btn-add">+</button>
+
+                                <input id="inp-file" type="file">
+
+                                <button id="btnExport" type="button">Export</button>
                         </div>
 		</header>
 
@@ -87,7 +94,8 @@
                         </div>
         	<table id="keyTable">
         		<thead>
-        			<tr>
+        			<tr> 
+                                        <th>Item #</th>
         				<th>Key</th>
         				<th>Text</th>
         			</tr>
@@ -95,7 +103,6 @@
         		<tbody id="tbody"></tbody>
         	</table>
         </aside>
-
         
         <div class="canvas-buffer"></div>
 
@@ -109,6 +116,11 @@
                 <div id="keysTextClose">X</div>
                 <textarea name="keysTextArea" id="keysTextArea" cols="100" rows="30"></textarea>
                 <button id="btnLoadKeys">Load Keys</button>
+        </aside>
+
+        <aside id="xmlOutputWrapper" class="hidden">
+                <div id="xCloseXML">X</div>
+                <div id="taXML" cols="30" rows="10"></div>
         </aside>
 
 </body>

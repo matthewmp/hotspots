@@ -1,5 +1,6 @@
 let state = {};
 let ouptXML;
+let updateBoxKeys;
 window.onload = function(){
     // Setup Canvas
     const canvas = document.getElementById('canvas');
@@ -33,6 +34,7 @@ window.onload = function(){
     const btnItem = document.getElementById('btnItem');
     const btnKey = document.getElementById('btnKey');
     const btnText = document.getElementById('btnText');
+    const btnUpdateKeys = document.getElementById('btnUpdateKeys');
 
     // Inputs that affect box key info
     const inpItem = document.getElementById('inpItem');
@@ -43,6 +45,9 @@ window.onload = function(){
     const formResizeCanvas = document.getElementById('form-resizeCanvas');
     const inpResizeWidth = document.getElementById('inp-resizeCanvasWidth');
     const inpResizeHeight = document.getElementById('inp-resizeCanvasHeight');
+
+    // Export Button
+    var btnExport = document.getElementById('btnExport');
 
     // Set All Form
     const formSetAll = document.getElementById('set-all');
@@ -88,6 +93,11 @@ window.onload = function(){
     var inpPaddingX = document.getElementById('inpPaddingX');
     var btnPaddingY = document.getElementById('btnPaddingY');
     var btnPaddingX = document.getElementById('btnPaddingX');
+
+    // Ouput Text Area for XML
+    var xmlOutputWrapper = document.getElementById('xmlOutputWrapper');
+    var taXML = document.getElementById('taXML');
+    var xCloseXML = document.getElementById('xCloseXML');
 
     // When file is selected
     btnUpload.addEventListener('change', function(e){
@@ -315,6 +325,15 @@ window.onload = function(){
     btnPaddingY.addEventListener('click', function(e){
         yPadding = inpPaddingY.value;
         showBoxData();
+    });
+
+    // Export button open XML output
+    btnExport.addEventListener('click', function(){
+        outputXML();
+    });
+
+    btnUpdateKeys.addEventListener('click', function(){
+        updateBoxKeys();
     });
 
     // Toolbar Movements
@@ -683,16 +702,19 @@ window.onload = function(){
 
     // Parse keys into state
     btnLoadKeys.addEventListener('click', function(){
+        state.keysArr.length = 0;
         let txt = keysTextArea.value;
         txt.split('\n').forEach(function(el, ind){
         let key = el.slice(0,3)
         let text = el.slice(3).trim();
+
         state.keysArr.push({
                 key,
                 text
             });
         });
         loadKeysToTable();
+        keysTextArea.value = '';
         keysTextBox.style.display = 'none';
     });
 
@@ -700,17 +722,22 @@ window.onload = function(){
     function loadKeysToTable(){
         // Clear Tabel
         tbody.innerHTML = '';
-        state.keysArr.forEach(function(el){
+
+        state.keysArr.forEach(function(el, ind){
             let tr = document.createElement('tr');
             tr.classList = 'tableRow'
             let key = document.createElement('td');
             key.classList = 'tdKey';
             let txt = document.createElement('td');
             txt.classList = 'tdText';
+            let itemNum = document.createElement('td');
+            itemNum.classList = 'tdItem';
 
+            itemNum.innerText = ind + 1;
             key.innerText = el.key;
             txt.innerText = el.text;
 
+            tr.appendChild(itemNum);
             tr.appendChild(key);
             tr.appendChild(txt);
             tbody.appendChild(tr);
@@ -720,19 +747,32 @@ window.onload = function(){
     // Handle event when key row is clicked
     keyTable.addEventListener('dblclick', function(e){
         if(e.target.parentElement.classList[0] === 'tableRow'){
-            let key = e.target.parentElement.childNodes[0].innerText;
-            let text = e.target.parentElement.childNodes[1].innerText;
+            let item = e.target.parentElement.childNodes[0].innerText;
+            let key = e.target.parentElement.childNodes[1].innerText;
+            let text = e.target.parentElement.childNodes[2].innerText;
 
             state.boxArr.forEach(function(el){
                 if(el.selected){
+                    el.item = item;
                     el.key = key;
                     el.text = text;
-
                     showBoxData(el);
                 }
             });
         }
     });
+
+    // Update keys of boxes with newly uploaded key data
+    updateBoxKeys = function(){  
+        state.boxArr.forEach(function(box, ind){
+            box.key = retrieveItemKey(parseInt(box.item) - 1);
+        });
+    }
+
+    function retrieveItemKey(itemNum){
+        var rows = document.getElementsByClassName('tableRow');
+        return rows[itemNum].children[1].innerText;
+    }
 
 //  Draw, State, Box Class
     function draw(){
@@ -822,34 +862,34 @@ window.onload = function(){
 
 
 //  XML Output Code
-const xmlHeader = 
-`
-<xml version="1.0">
-<hotspots>
 
-<!-- X = Left/Right -->
-<!-- Y = Up/Down -->
-<!-- All points are relative to the initial Xpos & ypos -->
-<!--" sname = system choice key -->
-`
-// Hotspot Items
+    outputXML = function(){
+    const xmlHeader = 
+    `
+    <xml version="1.0">
+    <hotspots>
 
+    <!-- X = Left/Right -->
+    <!-- Y = Up/Down -->
+    <!-- All points are relative to the initial Xpos & ypos -->
+    <!--" sname = system choice key -->
+    `
 
+    var output = '';
+    output += xmlHeader;
 
-    oupoutXML = function(){
-    console.log(xmlHeader);
     state.boxArr.forEach((el, ind) => {
         let hsItem = 
         `
         <!-- Item ${el.item} - ${el.text} -->
-        <spot sid=${el.item} sname=${el.key} width="0" height="0" xpos=${el.x + xPadding} ypos=${el.y + yPadding}>
+        <spot sid=${ind + 1} sname=${el.key} width="0" height="0" xpos=${el.x + xPadding} ypos=${el.y + yPadding}>
         <corner xax=${el.w} yax="0">2</corner>
         <corner xax=${el.w} yax=${el.h}>2</corner>
         <corner xax="0"  yax=${el.h}>4</corner>
         </spot>
         `
 
-        console.log(hsItem);
+        output += hsItem;
     });
 
     let tail = 
@@ -864,17 +904,24 @@ const xmlHeader =
         </xml>
     `
 
-    console.log(tail);
-}
+    output += tail;
+    xmlOutputWrapper.classList="";
+    taXML.innerText = '';
+    taXML.innerText = output;
+
+    }
+
+// Close XML output div
+xCloseXML.addEventListener('click', function(){
+    xmlOutputWrapper.classList = 'hidden'
+})
 
 
 
 
 
 
-
-
-
+    // Initialize state
     state = {
             boxArr: [],
             keysArr: []

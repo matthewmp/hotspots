@@ -83,6 +83,19 @@ header{
 	background: #fff;
 }
 
+#btnExport {
+    margin: 20px;
+    height: 50px;
+    width: 80px;
+    color: #222;
+    cursor: pointer;
+}
+
+#btnExport:active {
+	background: #fff;
+	color: #ff0000;
+}
+
 /*  Form Resize */
 #form-resizeCanvas input{
 	width: 60px;
@@ -97,7 +110,7 @@ header{
     color: #222;
 }
 
-#btn-add:active{
+#btn-add:active, #btn-minus:active{
 	background: #eee;
 	color: #ff0000;
 }
@@ -141,7 +154,9 @@ table
 
 th{
 	text-align: left;
+	min-width: 50px;
 }
+
 #key-holder-grab-bar {
 	display: inline-block;
 	vertical-align: middle;
@@ -174,6 +189,10 @@ th{
 
 #inpText{
 	width: 80%;
+}
+
+.tdItem, .tdKey{
+	text-align: center;
 }
 
 /* Key Text Area */
@@ -226,4 +245,40 @@ th{
 .tableRow:hover{
 	cursor: pointer;
 	background: #ff00ff;
+}
+
+/*  XML Output */
+
+aside#xmlOutputWrapper {
+    border: 5px solid #445;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 80%;
+    height: 80vh;
+    background: #fff;
+    overflow: scroll;
+}
+
+textarea#taXML {
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    overflow: scroll;
+}
+
+#xCloseXML {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    color: #222;
+    cursor: pointer;
+    float: right;
+    margin-right: 10px;
 }

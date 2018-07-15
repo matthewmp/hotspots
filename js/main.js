@@ -878,7 +878,11 @@ window.onload = function(){
     var output = '';
     output += xmlHeader;
 
-    state.boxArr.forEach((el, ind) => {
+    var ouputArr = state.boxArr.sort(function(a,b){
+        return parseInt(a.item) - parseInt(b.item);
+    });
+
+    ouputArr.forEach((el, ind) => {
         let hsItem = 
         `
         <!-- Item ${el.item} - ${el.text} -->

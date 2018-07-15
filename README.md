@@ -19,3 +19,6 @@ it's corresponding concept/key value in the Key's Table.
 
 When done the user can click the export button which will generate the default header/tail needed for this particular 
 company then iterate through each box(highlited object) and produce the xml code needed to plug into the flash app.
+
+App Link:
+https://matthewmp.github.io/hotspots/

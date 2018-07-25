@@ -85,7 +85,7 @@ window.onload = function(){
     let keyHolderWrapper = document.getElementById('keyHolderWrapper');
 
     // Set default padding for flash app
-    let xPadding = 0;
+    let xPadding = 8;
     let yPadding = 70;
 
     // Padding inputs and buttons
@@ -402,6 +402,7 @@ window.onload = function(){
 
 
     window.addEventListener('keypress', function(e){
+            console.log(e.keyCode);
             if(e.keyCode === 115){
                     keyBoardObj.multiSelect = true;
             } 
@@ -789,7 +790,7 @@ window.onload = function(){
                     ctx.fillRect(el.x, el.y, el.w, el.h);
                     adjustResizeBoxes(el);
                     resizeBoxDraw(el);
-                    ctx.strokeStyle = '#333';
+                    ctx.strokeStyle = '#fff';
                     ctx.font="10px arial";
                     ctx.strokeText(el.key, el.x + 2, el.y + 10);
                     ctx.strokeText(el.item, (el.x + el.w) - 20, el.y + 10);
@@ -883,13 +884,15 @@ window.onload = function(){
     });
 
     ouputArr.forEach((el, ind) => {
+        var ypos = el.y + yPadding + 2;
+        var xpos = el.x;
         let hsItem = 
         `
         <!-- Item ${el.item} - ${el.text} -->
-        <spot sid=${ind + 1} sname=${el.key} width="0" height="0" xpos=${el.x + xPadding} ypos=${el.y + yPadding}>
-        <corner xax=${el.w} yax="0">2</corner>
-        <corner xax=${el.w} yax=${el.h}>2</corner>
-        <corner xax="0"  yax=${el.h}>4</corner>
+        <spot sid="${ind + 1}" sname="${el.key}" width="0" height="0" xpos="${xpos}" ypos="${ypos}">
+        <corner xax="${el.w}" yax="0">2</corner>
+        <corner xax="${el.w}" yax="${el.h}">2</corner>
+        <corner xax="0"  yax="${el.h}">4</corner>
         </spot>
         `
 
@@ -899,7 +902,7 @@ window.onload = function(){
     let tail = 
     `
         </hotspots>
-          <img width=${canvas.width} height=${canvas.height} xpadding=${xPadding} ypadding=${yPadding} url="images/Cell_1.jpg"></img>
+          <img width="${canvas.width}px" height="${canvas.height}px" xpadding="${xPadding}px" ypadding="0px" url="images/Cell_1.jpg"></img>
           <choices all="" none="None are unique"></choices>
           <selectall sid="820"></selectall>
           <nothing sid="543"></nothing>

@@ -786,6 +786,8 @@ window.onload = function(){
             
             state.boxArr.forEach(function(el){
                     ctx.fillStyle = el.style;
+                    // Set Skew
+                    ctx.transform(1,el.hSkew, el.vSkew,1,0,0);
                     ctx.fillRect(el.x, el.y, el.w, el.h);
                     adjustResizeBoxes(el);
                     resizeBoxDraw(el);
@@ -793,6 +795,9 @@ window.onload = function(){
                     ctx.font="10px arial";
                     ctx.strokeText(el.key, el.x + 2, el.y + 10);
                     ctx.strokeText(el.item, (el.x + el.w) - 20, el.y + 10);
+                    // Clear Skew
+                    el.hSkew = 0;
+                    el.vSkew = 0;
             });
             window.requestAnimationFrame(draw);
     }
@@ -803,6 +808,9 @@ window.onload = function(){
                     this.y = 0,
                     this.w = 100,
                     this.h = 25,
+                    this.hSkew = 0.0,
+                    this.vSkew = 0.0
+
                     this.selected = false,
                     this.text = '',
                     this.key = '',
@@ -817,25 +825,12 @@ window.onload = function(){
                                     x: (this.x + this.w) / 2,
                                     y: this.y - 4
                             },
-                            // bottom: {
-                            //         w: 8,
-                            //         h: 8,
-                            //         x: (this.x + this.w) / 2,
-                            //         y: (this.y + this.h) - 4 / 2
-                            // },
-                            // left: {
-                            //         w: 8,
-                            //         h: 8,
-                            //         x: this.x - 4,
-                            //         y: (this.y + this.h) / 2
-                            // },
                             right: {
                                     w: 8,
                                     h: 8,
                                     x: this.x + this.w - 4,
                                     y: ((this.y + this.h) / 2) - 4
                             }
-
                     }
             }
 

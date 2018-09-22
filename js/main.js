@@ -85,8 +85,8 @@ window.onload = function(){
     let keyHolderWrapper = document.getElementById('keyHolderWrapper');
 
     // Set default padding for flash app
-    let xPadding = 8;
-    let yPadding = 70;
+    let xPadding = 0;
+    let yPadding = 0;
 
     // Padding inputs and buttons
     var inpPaddingY = document.getElementById('inpPaddingY');
@@ -402,7 +402,6 @@ window.onload = function(){
 
 
     window.addEventListener('keypress', function(e){
-            console.log(e.keyCode);
             if(e.keyCode === 115){
                     keyBoardObj.multiSelect = true;
             } 
@@ -884,8 +883,8 @@ window.onload = function(){
     });
 
     ouputArr.forEach((el, ind) => {
-        var ypos = el.y + yPadding + 2;
-        var xpos = el.x;
+        var ypos = el.y + parseInt(yPadding) + 2;
+        var xpos = el.x + parseInt(xPadding) + 2;
         let hsItem = 
         `
         <!-- Item ${el.item} - ${el.text} -->
@@ -902,7 +901,7 @@ window.onload = function(){
     let tail = 
     `
         </hotspots>
-          <img width="${canvas.width}px" height="${canvas.height}px" xpadding="${xPadding}px" ypadding="0px" url="images/Cell_1.jpg"></img>
+          <img width="${canvas.width}px" height="${canvas.height}px" xpadding="0px" ypadding="0px" url="images/Cell_1.jpg"></img>
           <choices all="" none="None are unique"></choices>
           <selectall sid="820"></selectall>
           <nothing sid="543"></nothing>

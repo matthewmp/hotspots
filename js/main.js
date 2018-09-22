@@ -15,6 +15,7 @@ window.onload = function(){
     const inpY = document.getElementById('inpY');   // Position y field
     const inpW = document.getElementById('inpW');   // Width field
     const inpH = document.getElementById('inpH');   // Height Field
+    const inpXskew = document.getElementById('inpXskew');
 
     // Grab Toolbar
     const header = document.getElementById('header');
@@ -29,6 +30,10 @@ window.onload = function(){
     const btnWdown = document.getElementById('btn-w-down');
     const btnHup = document.getElementById('btn-h-up');
     const btnHdown = document.getElementById('btn-h-down');
+    const btnXSup = document.getElementById('btn-xSkew-up');
+    const btnXSdown = document.getElementById('btn-xSkew-down');
+    const btnYSup= document.getElementById('btn-ySkew-up');
+    const btnYSdown= document.getElementById('btn-ySkew-down');
 
     // All buttons that affect box key info
     const btnItem = document.getElementById('btnItem');
@@ -176,6 +181,7 @@ window.onload = function(){
                             inpText.value = box.text;
                             inpKey.value = box.key;
                             inpItem.value = box.item;
+                            inpXskew.value = box.xSkew;
                    }
             })
             inpPaddingX.value = xPadding;
@@ -284,6 +290,28 @@ window.onload = function(){
                             if(box.w <= 5){
                                     box.w = 5;
                             }
+                            showBoxData();
+                    }
+            });    
+    });
+
+    // Increase xSkew
+    btnXSup.addEventListener('mousedown', function(e){
+           state.boxArr.forEach(function(box){
+                    if(box.selected){
+                            box.xSkew += 1;
+                            adjustResizeBoxes(box);
+                            showBoxData();
+                    }
+            });    
+    });
+
+    // Decrease xSkew
+    btnXSdown.addEventListener('mousedown', function(e){
+           state.boxArr.forEach(function(box){
+                    if(box.selected){
+                            box.xSkew -= 1;
+                            adjustResizeBoxes(box);
                             showBoxData();
                     }
             });    
@@ -610,9 +638,9 @@ window.onload = function(){
 
     // Reposition Resize Boxes While Adjusting
     function adjustResizeBoxes(el){
-            el.resize.top.y = el.y;
+            el.resize.top.y = el.y + (el.xSkew / 2);
             el.resize.top.x = el.x + (el.w / 2);
-            el.resize.right.y = el.y + (el.h / 2) - 4;
+            el.resize.right.y = el.y + (el.h / 2) - 4 + (el.xSkew);
             el.resize.right.x = el.x + el.w - 8;
     }
 
@@ -787,17 +815,29 @@ window.onload = function(){
             state.boxArr.forEach(function(el){
                     ctx.fillStyle = el.style;
                     // Set Skew
-                    ctx.transform(1,el.hSkew, el.vSkew,1,0,0);
-                    ctx.fillRect(el.x, el.y, el.w, el.h);
+                   
+                    //ctx.fillRect(el.x, el.y, el.w, el.h);
+                    ctx.beginPath();
+                    // Move to upper left corner to begin drawing of block
+                    ctx.moveTo(el.x, el.y);
+                    // Draw line across the top right corner of block
+                    ctx.lineTo((el.x + el.w), (el.y + el.xSkew));
+                    // Draw line from top right to bottom right corner of block
+                    ctx.lineTo((el.x + el.w), (el.y + el.h + el.xSkew));
+                    // Draw line from bottom right to bottom left corner of block
+                    ctx.lineTo(el.x, (el.y + el.h));
+                    //ctx.lineTo(el.y);
+                    ctx.closePath();
+                    ctx.strokeStyle = '#00ff00';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    ctx.fill();
                     adjustResizeBoxes(el);
                     resizeBoxDraw(el);
                     ctx.strokeStyle = '#fff';
                     ctx.font="10px arial";
                     ctx.strokeText(el.key, el.x + 2, el.y + 10);
                     ctx.strokeText(el.item, (el.x + el.w) - 20, el.y + 10);
-                    // Clear Skew
-                    el.hSkew = 0;
-                    el.vSkew = 0;
             });
             window.requestAnimationFrame(draw);
     }
@@ -808,8 +848,8 @@ window.onload = function(){
                     this.y = 0,
                     this.w = 100,
                     this.h = 25,
-                    this.hSkew = 0.0,
-                    this.vSkew = 0.0
+                    this.xSkew = 0,
+                    this.vSkew = 0,
 
                     this.selected = false,
                     this.text = '',
@@ -823,13 +863,13 @@ window.onload = function(){
                                     w: 8,
                                     h: 8,
                                     x: (this.x + this.w) / 2,
-                                    y: this.y - 4
+                                    y: this.y + this.xSkew - 4
                             },
                             right: {
                                     w: 8,
                                     h: 8,
                                     x: this.x + this.w - 4,
-                                    y: ((this.y + this.h) / 2) - 4
+                                    y: ((this.y + this.h) / 2) + this.xSkew - 4
                             }
                     }
             }
